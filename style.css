@@ -137,81 +137,95 @@ th {
     border-left: 5px solid var(--accent-color);
     padding-left: 20px;
 }
-/* --- ИСПРАВЛЕННЫЙ КОД ДЛЯ ЛИНИЙ И НЕОНОВОГО ЗАГОЛОВКА --- */
-
-/* Переносим черный фон на html, чтобы body стал прозрачным для линий */
-html {
-    background-color: #0a0a0a;
-}
+/* --- ДИНАМИЧЕСКИЙ НЕОНОВЫЙ ФОН (вместо линий) --- */
 
 body {
-    background-color: transparent; /* Прозрачный фон */
+    background-color: #050505; /* Очень темный, почти черный фон */
     position: relative;
     overflow-x: hidden;
 }
 
-/* Верхняя бело-розовая линия */
+/* Создаем два больших светящихся пятна на фоне */
 body::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 4px; /* Сделали чуть толще, чтобы было виднее */
-    background: linear-gradient(90deg, transparent, #ffffff, #ff1493, transparent);
-    animation: slideLine1 10s linear infinite;
-    z-index: 9999; /* Поднимаем на самый верх */
-    pointer-events: none; /* Чтобы линии не мешали кликать по кнопкам */
+    top: -20%;
+    left: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(255, 20, 147, 0.25) 0%, transparent 60%);
+    border-radius: 50%;
+    animation: floatOrb 15s infinite alternate ease-in-out;
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(60px);
 }
 
-/* Нижняя розово-белая линия */
 body::after {
     content: '';
     position: fixed;
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, #ff1493, #ffffff, transparent);
-    animation: slideLine2 15s linear infinite;
-    z-index: 9999;
+    bottom: -20%;
+    right: -10%;
+    width: 70vw;
+    height: 70vw;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 0%, transparent 60%);
+    border-radius: 50%;
+    animation: floatOrb2 20s infinite alternate ease-in-out;
+    z-index: -1;
     pointer-events: none;
+    filter: blur(80px);
 }
 
-@keyframes slideLine1 {
-    0% { left: -100%; }
-    100% { left: 100%; }
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 10%) scale(1.2); }
 }
 
-@keyframes slideLine2 {
-    0% { right: -100%; }
-    100% { right: 100%; }
+@keyframes floatOrb2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-10%, -10%) scale(1.3); }
 }
 
-/* Неоновая надпись для главной страницы */
-.neon-title {
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 900;
-    color: #ffffff;
-    text-align: center;
-    text-transform: uppercase;
-    text-shadow: 
-        0 0 5px #fff,
-        0 0 15px #ff1493,
-        0 0 30px #ff1493,
-        0 0 60px #8a2be2;
-    animation: neonGlow 1.5s ease-in-out infinite alternate;
-    margin-bottom: 30px;
-    letter-spacing: 3px;
-    font-family: 'Montserrat', sans-serif;
+/* --- УЛУЧШЕНИЕ ДИЗАЙНА --- */
+
+/* Добавляем свечение и размытие навигации */
+nav {
+    background-color: rgba(5, 5, 5, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 20, 147, 0.3);
 }
 
-@keyframes neonGlow {
-    0% { text-shadow: 0 0 5px #fff, 0 0 15px #ff1493, 0 0 30px #ff1493, 0 0 60px #8a2be2; }
-    100% { text-shadow: 0 0 10px #fff, 0 0 25px #ff1493, 0 0 50px #ff1493, 0 0 80px #8a2be2; }
+/* Делаем заголовки чуть более объемными */
+h1, h2 {
+    text-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
 }
 
-/* --- НЕОНОВЫЙ ЗАГОЛОВОК (как на фото 2) --- */
+/* Добавляем свечение карточкам (для тренеров и FAQ) */
+.card {
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 20, 147, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+    border-color: #ff1493;
+    box-shadow: 0 0 25px rgba(255, 20, 147, 0.4);
+    background: rgba(26, 26, 26, 0.9);
+}
+
+/* Делаем таблицу чуть прозрачнее и добавляем свечение заголовкам */
+table {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 20, 147, 0.2);
+}
+
+th {
+    background: linear-gradient(90deg, #ff1493, #8a2be2) !important;
+}
+
+/* --- НЕОНОВЫЙ ЗАГОЛОВОК --- */
 .neon-title {
     font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 900;
