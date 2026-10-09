@@ -264,7 +264,7 @@ html::before {
     border-radius: 50% 50% 0 0;
     box-shadow: 0 -5px 20px rgba(255, 255, 255, 0.6);
     pointer-events: none;
-    z-index: 999;
+    z-index: 1;
 }
 
 html::after {
@@ -278,10 +278,14 @@ html::after {
     border-radius: 50% 50% 0 0;
     box-shadow: 0 -5px 20px rgba(255, 182, 193, 0.6);
     pointer-events: none;
-    z-index: 998;
+    z-index: 1;
     transform: rotate(2deg);
 }
-
+/* Поднимаем текст выше линий */
+.container, .site-footer {
+    position: relative;
+    z-index: 10;
+}
 /* --- ЭФФЕКТ РАСПЛЫВЧАТОГО ФОТО (для страницы О студии) --- */
 .fading-image {
     width: 100%;
