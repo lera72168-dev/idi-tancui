@@ -417,39 +417,27 @@ html::after {
     0% { left: -100%; }
     100% { left: 100%; }
 }
-/* --- СТИЛИ ДЛЯ ФОНОВОГО ФОТО НА СТРАНИЦЕ "О СТУДИИ" --- */
-
-/* Делаем контейнер относительным, чтобы фото позиционировалось внутри него */
-.container {
+/* --- ФОНОВОЕ ФОТО НА СТРАНИЦЕ "О СТУДИИ" (надежный способ) --- */
+.about-page {
     position: relative;
-    overflow: hidden; /* Чтобы фото не вылезало за пределы блока */
+    z-index: 1; /* Контейнер находится выше фона body */
 }
 
-/* Настройки самого фонового фото */
-.bg-studio-image {
+.about-page::before {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Центрируем фото */
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 900px;
-    opacity: 0.15; /* Делаем его полупрозрачным (15% видимости) */
-    z-index: 0; /* Отправляем на самый задний план */
-    pointer-events: none; /* Чтобы фото не мешало выделять текст и кликать по ссылкам */
-    filter: blur(1px); /* Легкое размытие для мягкости */
-    
-    /* Эффект плавного растворения по краям */
-    -webkit-mask-image: radial-gradient(circle, black 20%, transparent 70%);
-    mask-image: radial-gradient(circle, black 20%, transparent 70%);
-}
-
-/* Поднимаем весь текст в контейнере выше фонового фото */
-.container h1, 
-.container h2, 
-.container p, 
-.container ul, 
-.container table, 
-.container .card {
-    position: relative;
-    z-index: 1; /* Текст будет поверх фона */
+    height: 100%;
+    background-image: url('images/neon.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15; /* Прозрачность 15% */
+    filter: blur(2px); /* Легкое размытие */
+    z-index: -1; /* Фото уходит на задний план внутри контейнера */
+    pointer-events: none; /* Клики проходят сквозь фото */
+    -webkit-mask-image: radial-gradient(circle, black 10%, transparent 70%);
+    mask-image: radial-gradient(circle, black 10%, transparent 70%);
 }
