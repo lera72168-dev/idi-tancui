@@ -466,12 +466,8 @@ html::after {
     height: auto !important;
     object-fit: contain !important;
     
-    /* МАГИЯ: Растворяем белый фон */
-   mix-blend-mode: darken !important; 
-    
-    /* Оставляем свечение и контраст */
+    /* Свечение вокруг обуви */
     filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.6)) contrast(1.1) !important;
-}
 }
 
 .trainer-info {
