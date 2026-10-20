@@ -441,56 +441,51 @@ html::after {
     -webkit-mask-image: radial-gradient(circle, black 10%, transparent 70%);
     mask-image: radial-gradient(circle, black 10%, transparent 70%);
 }
-/* --- СТИЛИ ДЛЯ СТРАНИЦЫ ТРЕНЕРОВ (Фото слева, текст справа) --- */
-
+/* --- СТИЛИ ДЛЯ ТРЕНЕРОВ (Grid-сетка) --- */
 .trainer-card {
-    display: flex;
-    align-items: center; /* Выравниваем по центру по вертикали */
-    gap: 40px; /* Отступ между фото и текстом */
-    padding: 40px;
-    overflow: hidden;
+    display: grid !important;
+    grid-template-columns: 300px 1fr !important; /* Фото 300px, текст - всё остальное */
+    gap: 40px !important;
+    align-items: center !important;
+    background: rgba(26, 26, 26, 0.8) !important;
+    border: 1px solid rgba(255, 20, 147, 0.3) !important;
+    border-radius: 15px !important;
+    padding: 30px !important;
+    margin-bottom: 30px !important;
 }
 
 .trainer-image {
-    flex: 0 0 45%; /* Фото занимает 45% ширины карточки */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .trainer-image img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    object-fit: contain;
-    
-    /* Магия для смешивания с фоном сайта */
-    /* Если фон на фото темный, этот режим сделает его прозрачным */
-    mix-blend-mode: screen; 
-    
-    /* Добавляем легкое свечение и корректируем яркость, чтобы свет был похож */
-    filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.3)) contrast(1.1) brightness(1.1);
+    width: 100% !important;
+    max-width: 250px !important;
+    height: auto !important;
+    object-fit: contain !important;
+    /* Убираем mix-blend-mode, так как у вас будет честный прозрачный PNG */
+    filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.4)) contrast(1.1) !important;
 }
 
 .trainer-info {
-    flex: 1; /* Текст занимает всё оставшееся место */
+    text-align: left !important;
 }
 
-/* Адаптивность для телефонов */
+.trainer-info h2 {
+    text-align: left !important;
+    margin-bottom: 10px !important;
+    color: #ff1493 !important;
+}
+
+/* Адаптация для телефонов */
 @media (max-width: 768px) {
     .trainer-card {
-        flex-direction: column; /* На телефонах фото будет сверху, текст снизу */
-        text-align: center;
-        gap: 20px;
-        padding: 20px;
+        grid-template-columns: 1fr !important; /* На телефоне фото сверху */
+        text-align: center !important;
     }
-    
-    .trainer-image {
-        flex: 0 0 100%;
-        margin-bottom: 10px;
-    }
-    
-    .trainer-image img {
-        max-width: 250px; /* Уменьшаем фото на телефонах */
+    .trainer-info, .trainer-info h2 {
+        text-align: center !important;
     }
 }
