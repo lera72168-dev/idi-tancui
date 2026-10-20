@@ -441,3 +441,56 @@ html::after {
     -webkit-mask-image: radial-gradient(circle, black 10%, transparent 70%);
     mask-image: radial-gradient(circle, black 10%, transparent 70%);
 }
+/* --- СТИЛИ ДЛЯ СТРАНИЦЫ ТРЕНЕРОВ (Фото слева, текст справа) --- */
+
+.trainer-card {
+    display: flex;
+    align-items: center; /* Выравниваем по центру по вертикали */
+    gap: 40px; /* Отступ между фото и текстом */
+    padding: 40px;
+    overflow: hidden;
+}
+
+.trainer-image {
+    flex: 0 0 45%; /* Фото занимает 45% ширины карточки */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trainer-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    
+    /* Магия для смешивания с фоном сайта */
+    /* Если фон на фото темный, этот режим сделает его прозрачным */
+    mix-blend-mode: screen; 
+    
+    /* Добавляем легкое свечение и корректируем яркость, чтобы свет был похож */
+    filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.3)) contrast(1.1) brightness(1.1);
+}
+
+.trainer-info {
+    flex: 1; /* Текст занимает всё оставшееся место */
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 768px) {
+    .trainer-card {
+        flex-direction: column; /* На телефонах фото будет сверху, текст снизу */
+        text-align: center;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .trainer-image {
+        flex: 0 0 100%;
+        margin-bottom: 10px;
+    }
+    
+    .trainer-image img {
+        max-width: 250px; /* Уменьшаем фото на телефонах */
+    }
+}
