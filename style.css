@@ -465,8 +465,13 @@ html::after {
     max-width: 250px !important;
     height: auto !important;
     object-fit: contain !important;
-    /* Убираем mix-blend-mode, так как у вас будет честный прозрачный PNG */
-    filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.4)) contrast(1.1) !important;
+    
+    /* МАГИЯ: Растворяем белый фон */
+    mix-blend-mode: multiply !important; 
+    
+    /* Оставляем свечение и контраст */
+    filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.6)) contrast(1.1) !important;
+}
 }
 
 .trainer-info {
