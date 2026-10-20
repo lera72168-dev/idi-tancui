@@ -493,3 +493,49 @@ html::after {
         text-align: center !important;
     }
 }
+/* --- ЭФФЕКТ МЕРЦАЮЩИХ БЛЕСТОК --- */
+.sparkles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Чтобы блестки не мешали кликать по кнопкам */
+    z-index: 99; /* Слой поверх фона, но под навигацией */
+    
+    /* Создаем два слоя блесток разного размера и цвета */
+    background-image: 
+        radial-gradient(circle at 15% 20%, white 1.5px, transparent 2px),
+        radial-gradient(circle at 35% 65%, #ff1493 1px, transparent 2px),
+        radial-gradient(circle at 55% 40%, white 1px, transparent 1.5px),
+        radial-gradient(circle at 75% 10%, white 2px, transparent 3px),
+        radial-gradient(circle at 85% 80%, #ff1493 1.5px, transparent 2.5px),
+        radial-gradient(circle at 10% 90%, white 1px, transparent 2px),
+        radial-gradient(circle at 45% 85%, white 1.5px, transparent 2px);
+    background-size: 250px 250px; /* Расстояние между блестками */
+    
+    /* Анимация мерцания */
+    animation: glitterPulse 3s infinite alternate;
+}
+
+/* Второй слой блесток для объема (движется с другой скоростью) */
+.sparkles::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, white 1px, transparent 1.5px),
+        radial-gradient(circle at 60% 30%, #ff1493 2px, transparent 3px),
+        radial-gradient(circle at 80% 60%, white 1px, transparent 2px),
+        radial-gradient(circle at 40% 10%, white 1.5px, transparent 2px),
+        radial-gradient(circle at 90% 40%, #ff1493 1px, transparent 1.5px);
+    background-size: 300px 300px;
+    animation: glitterPulse 4s infinite alternate-reverse;
+}
+
+/* Сама анимация переливания */
+@keyframes glitterPulse {
+    0% { opacity: 0.2; filter: brightness(1); }
+    50% { opacity: 1; filter: brightness(1.5) drop-shadow(0 0 5px rgba(255,255,255,0.8)); }
+    100% { opacity: 0.2; filter: brightness(1); }
+}
